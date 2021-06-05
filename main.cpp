@@ -1,16 +1,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
-//  Copyright (c) 2021        Michael  Julian  Moran    All rights reserved  //
+//  Copyright (c) 2021 ____   Michael  Julian  Moran    All rights reserved  //
 //                                                                           //
+//                        Not intended for distribution.                     //
 //                                                                           //
-//               The author is not responsible for any damage.               //
-//   This includes but not limited to the injury, damage or destruction of   //
-//           any person, piece or pieces of hardware, software, data         //
-//                or anything in the known or unknown universe.              //
-//                                                                           //
-// Having this on you're computer at all, ever is an agreement to the terms. //
+//                            Use at your own risk.                          //
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
+
 //#include<iostream>
 #include <chrono>
 #include <thread>
