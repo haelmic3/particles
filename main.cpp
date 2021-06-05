@@ -56,15 +56,15 @@ struct Array
 };
 class Graph : public sf::Drawable
 {
+ public:
 	using type = unsigned long long;
 	using vtype = float;
- public:
 	std::vector<sf::Vertex> value;
 	sf::PrimitiveType primitive;
 	sf::RenderStates states;
-	Graph():value{}, primitive{sf::PrimitiveType::Points}, states{}
+	Graph(bool line=false):value{}, primitive{line?sf::PrimitiveType::LineStrip:sf::PrimitiveType::Points}, states{}
 	{}
-	void clip(float x_min, float x_max, float y_min, float y_max)
+	void clip(vtype x_min, vtype x_max, vtype y_min, vtype y_max)
 	{
 		auto e = value.begin();
 		auto n = value.end();
@@ -78,7 +78,13 @@ class Graph : public sf::Drawable
 			&&	y_min < p.y && p.y < y_max
 			)
 				++w;
+			else
+			{
+				// TODO save *w to clip buffer
+			}
 		}
+		// TODO add values from clip buffer within the frame
+		// TODO save w through value.end() to clip buffer
 		while(w!=value.end())value.pop_back();
 	}
 	void plot(sf::Vector2f p, sf::Color k = sf::Color::White)
@@ -88,8 +94,8 @@ class Graph : public sf::Drawable
 
 	virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const
 	{
-		states.transform *= this->states.transform;
 		auto t = value.size();
+		states.transform *= this->states.transform;
 		if (t) target.draw(&value[0], t, primitive, states);
 	}
 };
@@ -105,7 +111,7 @@ class View : public sf::Drawable
 	Stat<double> fps;
 	Stat<double> full_fps;
  public:
-	View():tl({5,5}),freefont(),stats(),graph(),width{},height{},fps{}
+	View():tl({5,5}),freefont(),stats(),graph(true),width{},height{},fps{}
 	{
 		tl.setFillColor(sf::Color::Red);
 		freefont.loadFromFile("FreeMono.ttf");
